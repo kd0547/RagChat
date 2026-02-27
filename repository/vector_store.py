@@ -30,17 +30,25 @@ class VectorStore:
             persist_directory=save_path,
         )
 
-    def find(self):
-
-
-        pass
+    def find(self,
+             query:str,
+             k:int = 5
+             ):
+        docs = self._vectorstore.similarity_search(
+            query=query,
+            k=k
+        )
+        return docs
 
     def add(self,document:Document):
         """단일 문서 추가"""
         ids = get_documents_id(document)
+
+        document.id = id
+
         self._vectorstore.add_documents(
-            document,
-            ids=ids
+            documents=[document],
+            ids=[ids]
         )
 
     def save_all(self,documents:list[Document]):

@@ -13,7 +13,7 @@ class DocumentOCRPreprocessor:
     def process(self, image_path_or_bytes) -> str:
         # 이미지 → Markdown/JSON/텍스트 추출
         result = self.pipeline.predict(image_path_or_bytes)
-        return result['markdown']  # 또는 result['text'], result['structured']
+        return result  # 또는 result['text'], result['structured']
 
     def process_file(self, file_path: str) -> str:
         # PDF/이미지 파일 지원 로직 추가
